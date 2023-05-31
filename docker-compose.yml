@@ -9,3 +9,10 @@ services:
                         - ./volumes:/volumes
                         - ./instance:/instance
                 restart: unless-stopped
+volumes:
+  persistent_volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/ubuntu/TeamRepoBackend2/volumes
