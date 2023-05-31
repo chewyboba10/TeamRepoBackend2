@@ -12,13 +12,11 @@ class Geoguessr(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     _username = db.Column(db.String(255), unique=False, nullable=False)
     _score = db.Column(db.String(255), unique=False, nullable=False)
-    _stopwatch = db.Column(db.String(255), unique=False, nullable=False)
     _dos = db.Column(db.Date)
 
-    def __init__(self, username="none", score='0', stopwatch='00:00:00', dos=date.today()):
+    def __init__(self, username="none", score='0', dos=date.today()):
         self._username = username
         self._score = score
-        self._stopwatch = stopwatch
         self._dos = dos
 
     @property
@@ -58,7 +56,7 @@ class Geoguessr(db.Model):
             db.session.remove()
             return None
     
-    def update(self, username="", score="", stopwatch=""):
+    def update(self, username="", score=""):
         if len(username) > 0:
             self.username = username
         if len(score) > 0:
