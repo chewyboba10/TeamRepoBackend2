@@ -23,13 +23,11 @@ class GeoguessrAPI:
             if score is None or int(score) <= 0:
                 return {'message': 'Score does not exist, is missing, or is invalid'}, 210
 
-            stopwatch = body.get('stopwatch')
             game_datetime = body.get('game_datetime')
 
             uo = Geoguessr(
                 username=username,
-                score=score,
-                stopwatch=stopwatch)
+                score=score)
 
             
             if game_datetime is not None:

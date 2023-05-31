@@ -37,14 +37,6 @@ class Geoguessr(db.Model):
     @score.setter
     def score(self, score):
         self._score = score
-
-    @property
-    def stopwatch(self):
-        return self._stopwatch
-    
-    @stopwatch.setter
-    def stopwatch(self, stopwatch):
-        self._stopwatch = stopwatch
     
     # Convert dos to a string
     @property
@@ -71,8 +63,6 @@ class Geoguessr(db.Model):
             self.username = username
         if len(score) > 0:
             self.score = score
-        if len(stopwatch) > 0:
-            self.stopwatch = stopwatch
         db.session.commit()
         return self
 
@@ -86,7 +76,6 @@ class Geoguessr(db.Model):
             "id": self.id,
             "username": self.username,
             "score": self.score,
-            "stopwatch": self.stopwatch,
             "dos": self.dos
         }
 
@@ -94,11 +83,11 @@ def initGeoguessr():
     with app.app_context():
         db.create_all()
         users = [
-        Geoguessr(username='Evan', score='500', stopwatch='00:15:30', dos=date(2023, 1, 22)),
-        Geoguessr(username='Max', score='650', stopwatch='00:10:45', dos=date(2023, 1, 21)),
-        Geoguessr(username='Kalani', score='0', stopwatch='00:05:20', dos=date(2023, 1, 20)),
-        Geoguessr(username='Nathan', score='650', stopwatch='00:12:40', dos=date(2023, 1, 19)),
-        Geoguessr(username='Jaden', score='1100', stopwatch='00:25:10', dos=date(2023, 1, 22))
+        Geoguessr(username='Evan', score='500', dos=date(2023, 1, 22)),
+        Geoguessr(username='Max', score='650', dos=date(2023, 1, 21)),
+        Geoguessr(username='Kalani', score='0', dos=date(2023, 1, 20)),
+        Geoguessr(username='Nathan', score='650', dos=date(2023, 1, 19)),
+        Geoguessr(username='Jaden', score='1100', dos=date(2023, 1, 22))
         ]
 
         for user in users:
