@@ -23,16 +23,16 @@ class GeoguessrAPI:
             if score is None or int(score) <= 0:
                 return {'message': 'Score does not exist, is missing, or is invalid'}, 210
 
-            game_datetime = body.get('game_datetime')
+            dos = body.get('dos')
 
             uo = Geoguessr(
                 username=username,
                 score=score)
 
             
-            if game_datetime is not None:
+            if dos is not None:
                 try:
-                    uo.dos = datetime.strptime(game_datetime, '%m-%d-%Y').date()
+                    uo.dos = datetime.strptime(dos, '%m-%d-%Y').date()
                 except ValueError:
                     return {'message': 'Invalid date format. Must be mm-dd-yyyy'}, 210
 
@@ -50,7 +50,7 @@ class GeoguessrAPI:
             body = request.get_json()
             username = body.get('username')
             score = body.get('score')
-            game_datetime = body.get('game_datetime')
+            dos = body.get('dos')
             data = body.get('data')
             player = Geoguessr.query.get(username)  # get the player (using the uid in this case)
             player.update(data)
@@ -63,9 +63,9 @@ class GeoguessrAPI:
                     return {'message': 'Score is invalid'}, 400
                 user.score = int(score)
 
-            if game_datetime:
+            if dos:
                 try:
-                    user.game_datetime = datetime.strptime(game_datetime, '%m-%d-%Y').date()
+                    user.dos = datetime.strptime(dos, '%m-%d-%Y').date()
                 except ValueError:
                     return {'message': 'Invalid date format. Must be mm-dd-yyyy'}, 400
 
